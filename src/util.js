@@ -3,15 +3,15 @@ import { resolve } from 'node:path';
 
 /**
  * Given a file path pointing to JSON, return the parsed JSON object or array.
- * @param path The path to the file
- * @returns A Promise resolving to the object or array in the
+ * @param {string} path The path to the file
+ * @returns {Promise<{} | []>} A Promise resolving to the object or array in the
  * contained JSON file.
  */
 async function readJson(path) {
     const content = await readFile(path, 'utf8');
     try {
         return JSON.parse(content);
-    } catch (err) {
+    } catch (/** @type {any} */ err) {
         console.error(`Error parsing JSON from file ${path}: ${err}`);
         throw new Error(`Cannot parse ${path} as JSON: ${err.message}`);
     }
@@ -20,9 +20,10 @@ async function readJson(path) {
 /**
  * Given a path to a directory, return an array with the contents of all JSON
  * files in that directory
- * @param directoryPath The path to the directory.
- * @returns A Promise resolving to an array of objects or arrays, one for each
- * of the JSON files found in the referenced directory.
+ * @param {string} directoryPath The path to the directory
+ * @returns {Promise<({} | [])[]>} An array of promises resolving to an array of
+ * objects or arrays, one for each of the JSON files found in the referenced
+ * directory.
  */
 export async function readAllFiles(directoryPath) {
     const statResult = await stat(directoryPath);
@@ -32,13 +33,10 @@ export async function readAllFiles(directoryPath) {
     }
 
     const fileList = await readdir(directoryPath);
-    const results = [];
+
     const promises = fileList.map(async (entry) => {
         const entryPath = resolve(directoryPath, entry);
-        const entryResult = await readJson(entryPath);
-        results.push(entryResult);
+        return readJson(entryPath);
     });
-    await Promise.all(promises);
-
-    return results;
+    return Promise.all(promises);
 }

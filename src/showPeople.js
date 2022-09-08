@@ -8,7 +8,7 @@ export async function run(){
     out(`People (Data Directory ${dataDir}):`);
 
     const people = await readAllFiles(dataDir);
-    people.forEach((person) => {
+    people.forEach((/** @type {any} */ person) => {
         const { firstName, lastName, nickname, address: { city } } = person;
         out(`    ${firstName} "${nickname}" ${lastName} from ${city}`);
     });
