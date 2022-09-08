@@ -1,21 +1,18 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-
-/**
- * @typedef { import('./Person.js').Person } Person
- */
+import { Person } from './Person.js';
 
 /**
  * Given a file path pointing to JSON, return the parsed JSON object or array.
- * @param {string} path The path to the file
- * @returns {Promise<{} | []>} A Promise resolving to the object or array in the
+ * @param path The path to the file
+ * @returns A Promise resolving to the object or array in the
  * contained JSON file.
  */
-async function readJson(path) {
+async function readJson(path: string): Promise<{}> {
     const content = await readFile(path, 'utf8');
     try {
         return JSON.parse(content);
-    } catch (/** @type {any} */ err) {
+    } catch (err: any) {
         console.error(`Error parsing JSON from file ${path}: ${err}`);
         throw new Error(`Cannot parse ${path} as JSON: ${err.message}`);
     }
@@ -29,7 +26,7 @@ async function readJson(path) {
  * objects or arrays, one for each of the JSON files found in the referenced
  * directory.
  */
-async function readAllFiles(directoryPath) {
+async function readAllFiles(directoryPath: string): Promise<{}[]> {
     const statResult = await stat(directoryPath);
     if (!statResult.isDirectory()) {
         const message = `The given path, "${directoryPath}", is not a directory.`;
@@ -54,13 +51,11 @@ async function readAllFiles(directoryPath) {
  * static analysis on any caller of this method to ensure it is using the
  * returned array correctly.
  *
- * @param {string} directoryPath The path to the directory containing JSON files
+ * @param directoryPath The path to the directory containing JSON files
  * that describe People instances.
- * @returns {Promise<Person[]>} An array of Promises, each one resolving to
- * a Person instance.
+ * @returns An array of Person instances
  */
-export async function readAllPeople(directoryPath) {
-    /** @type {any[]} */
+export async function readAllPeople(directoryPath: string): Promise<Person[]> {
     const results = await readAllFiles(directoryPath);
-    return results;
+    return results as Person[];
 }
