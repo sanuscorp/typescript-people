@@ -1,0 +1,10 @@
+{
+  "firstName": "Kimi",
+  "lastName": "Wagener",
+  "nickname": "Door Destroyer",
+  "address": {
+    "street": "123 Fake St",
+    "city": "Greenville",
+    "state": "SC"
+  }
+}
