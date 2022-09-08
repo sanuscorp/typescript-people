@@ -1,5 +1,9 @@
 import path from 'node:path';
-import { readAllFiles } from './util.js';
+import { readAllPeople } from './util.js';
+
+/**
+ * @typedef { import('./Person.js').Person } Person
+ */
 
 export async function run(){
     const dataDir = path.resolve(`.`, 'data');
@@ -7,8 +11,8 @@ export async function run(){
 
     out(`People (Data Directory ${dataDir}):`);
 
-    const people = await readAllFiles(dataDir);
-    people.forEach((/** @type {any} */ person) => {
+    const people = await readAllPeople(dataDir);
+    people.forEach((/** @type {Person} */ person) => {
         const { firstName, lastName, nickname, address: { city } } = person;
         out(`    ${firstName} "${nickname}" ${lastName} from ${city}`);
     });
