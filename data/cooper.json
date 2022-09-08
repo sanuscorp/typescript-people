@@ -1,0 +1,10 @@
+{
+  "firstName": "Cooper",
+  "lastName": "Wagener",
+  "nickname": "Coop",
+  "address": {
+    "street": "123 Fake St",
+    "city": "Brooklyn",
+    "state": "NE"
+  }
+}

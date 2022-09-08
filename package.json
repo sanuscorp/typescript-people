@@ -1,0 +1,16 @@
+{
+  "name": "typescript-people",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/run.js",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf build node_modules",
+    "start": "bin/run.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+  }
+}
