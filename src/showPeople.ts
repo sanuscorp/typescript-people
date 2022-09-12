@@ -10,8 +10,17 @@ export async function run() {
 
     const people = await readAllPeople(dataDir);
     people.forEach((person: Person) => {
-        const { firstName, lastName, nickname, address: { city} } = person;
-        out(`    ${firstName} "${nickname}" ${lastName} from ${city}`);
+        const {
+            firstName,
+            lastName,
+            nickname,
+            address: {
+                city,
+                street,
+                zip
+            },
+        } = person;
+        out(`    ${firstName} "${nickname}" ${lastName} from ${street}, ${city}, ${zip}`);
     });
 
     out(``);

@@ -22,3 +22,20 @@ export interface Address {
      */
     zip: string;
 }
+
+/**
+ * A Type Guard for the Address interface.
+ *
+ * @param obj The object to determine if it meets the Address interface or not.
+ */
+export function isAddress(obj: unknown): obj is Address {
+    if (typeof obj !== `object` || obj === null) {
+        return false;
+    }
+
+    const partial = obj as Partial<Address>;
+    return typeof partial.street === `string`
+        && typeof partial.city === `string`
+        && typeof partial.state === `string`
+        && typeof partial.zip === `string`;
+}

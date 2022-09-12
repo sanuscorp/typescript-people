@@ -5,6 +5,7 @@
   "address": {
     "street": "123 Fake St",
     "city": "Brooklyn",
-    "state": "NE"
+    "state": "NE",
+    "zip": "10010"
   }
 }

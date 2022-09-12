@@ -5,6 +5,7 @@
   "address": {
     "street": "123 Fake St",
     "city": "Greenville",
-    "state": "SC"
+    "state": "SC",
+    "zip": "29601"
   }
 }

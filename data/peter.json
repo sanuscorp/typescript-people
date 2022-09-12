@@ -3,8 +3,9 @@
   "lastName": "Wagener",
   "nickname": "Pedro",
   "address": {
-    "streetAddress": "123 Fake Street",
+    "street": "123 Fake Street",
     "city": "Brooklyn",
-    "state": "NE"
+    "state": "NE",
+    "zip": "12345"
   }
 }

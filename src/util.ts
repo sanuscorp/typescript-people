@@ -1,6 +1,6 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { Person } from './Person.js';
+import { Person, assertPerson } from './Person.js';
 
 /**
  * Given a file path pointing to JSON, return the parsed JSON object or array.
@@ -57,5 +57,12 @@ async function readAllFiles(directoryPath: string): Promise<{}[]> {
  */
 export async function readAllPeople(directoryPath: string): Promise<Person[]> {
     const results = await readAllFiles(directoryPath);
-    return results as Person[];
+
+    const people: Person[] = [];
+    results.forEach((result) => {
+        assertPerson(result);
+        people.push(result);
+    });
+
+    return people;
 }
